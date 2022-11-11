@@ -1,24 +1,38 @@
 import difflib
-import os
-
 
 with open("myfile.txt", 'r') as file1:
-  file1_contents = file1.readlines();
-file1 = open('myfile.txt', 'r+')
-file2 = open('compareTest.txt', 'r+')
+  file1_contents = file1.readlines()
+with open("compareTest.txt", 'r') as file2:
+  file2_contents = file2.readlines()
 
-text1 = file1.read(100)
-text2 = file2.read(100)
-print(text1)
-print(text2)
+diff = difflib.unified_diff(
+  file1_contents, file2_contents, fromfile = "file1.txt",
+  tofile = "file2.txt", lineterm=''
+)
 
-def compare_files(file1, file2):
-  compare = filecmp.cmp(file1, file2)
+for line in diff:
+  print(line)
 
-  if compare == True:
-    print("The files are the same.")
-  else:
-    print("The files are different.")
+with open("student_gpa_2019.txt", 'r') as file3:
+  file3_contents = file3.readlines()
+with open("student_gpa_2020.txt", 'r') as file4:
+  file4_contents = file4.readlines()
 
-compare_files(file1, file2)
+difference = difflib.unified_diff(
+  file3_contents, file4_contents, fromfile = "file3.txt",
+  tofile="file4.txt", lineterm= ''
+)
+
+for line in difference:
+  print(line)
+
+# file1 = open('myfile.txt', 'r+')
+# file2 = open('compareTest.txt', 'r+')
+
+# text1 = file1.read(100)
+# text2 = file2.read(100)
+# print(text1)
+# print(text2)
+
+
 
